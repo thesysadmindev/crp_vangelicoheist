@@ -87,11 +87,6 @@ AddEventHandler('crp_vangelicoheist:rob', function(robb)
 		end
 
 		if rob == false then
-
-			print(, , )
-
-			local xPlayer = ESX.GetPlayerFromId(source)
-			local xPlayers = ESX.GetExtendedPlayers()
 			rob = true
 			TriggerEvent(
 				"core_dispatch:addCall",
