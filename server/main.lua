@@ -88,6 +88,8 @@ AddEventHandler('crp_vangelicoheist:rob', function(robb)
 
 		if rob == false then
 
+			local xPlayer = ESX.GetPlayerFromId(source)
+			local xPlayers = ESX.GetExtendedPlayers()
 			rob = true
 			for _, xPlayer in pairs(xPlayers) do
 				print('test 11')
