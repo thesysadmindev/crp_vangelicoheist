@@ -28,13 +28,17 @@ AddEventHandler('crp_vangelicoheist:toofar', function(robb)
 	local xPlayers = ESX.GetExtendedPlayers()
 	rob = false
 	for _, xPlayer in pairs(xPlayers) do
+		print('test 1')
 		TriggerClientEvent('esx:showNotification', xPlayers[i], _U('robbery_cancelled_at') .. Stores[robb].nameofstore)
+		print('test 2')
 		TriggerClientEvent('crp_vangelicoheist:killblip', xPlayers[i])
 	end
 
 	if(robbers[source])then
+		print('test 3')
 		TriggerClientEvent('crp_vangelicoheist:toofarlocal', source)
 		robbers[source] = nil
+		print('test 4')
 		TriggerClientEvent('esx:showNotification', source, _U('robbery_has_cancelled') .. Stores[robb].nameofstore)
 	end
 end)
@@ -46,19 +50,24 @@ AddEventHandler('crp_vangelicoheist:endrob', function(robb)
 	local xPlayers = ESX.GetExtendedPlayers()
 	rob = false
 	for _, xPlayer in pairs(xPlayers) do
+		print('test 5')
 		TriggerClientEvent('esx:showNotification', xPlayers[i], _U('end'))
+		print('test 6')
 		TriggerClientEvent('crp_vangelicoheist:killblip', xPlayers[i])
 	end
 
 	if(robbers[source])then
+		print('test 7')
 		TriggerClientEvent('crp_vangelicoheist:robberycomplete', source)
 		robbers[source] = nil
+		print('test 8')
 		TriggerClientEvent('esx:showNotification', source, _U('robbery_has_ended') .. Stores[robb].nameofstore)
 	end
 end)
 
 RegisterServerEvent('crp_vangelicoheist:rob')
 AddEventHandler('crp_vangelicoheist:rob', function(robb)
+	print('test 1')
 
 	local source = source
 	local xPlayer = ESX.GetPlayerFromId(source)
@@ -70,7 +79,9 @@ AddEventHandler('crp_vangelicoheist:rob', function(robb)
 
 		if (os.time() - store.lastrobbed) < Config.SecBetwNextRob and store.lastrobbed ~= 0 then
 
+			print('test 9')
             TriggerClientEvent('crp_vangelicoheist:togliblip', source)
+			print('test 10')
 			TriggerClientEvent('esx:showNotification', source, _U('already_robbed') .. (Config.SecBetwNextRob - (os.time() - store.lastrobbed)) .. _U('seconds'))
 			return
 		end
@@ -79,17 +90,24 @@ AddEventHandler('crp_vangelicoheist:rob', function(robb)
 
 			rob = true
 			for _, xPlayer in pairs(xPlayers) do
+				print('test 11')
 				TriggerClientEvent('esx:showNotification', xPlayers[i], _U('rob_in_prog') .. store.nameofstore)
+				print('test 12')
 				TriggerClientEvent('crp_vangelicoheist:setblip', xPlayers[i], Stores[robb].position)
 			end
 
+			print('test 13')
 			TriggerClientEvent('esx:showNotification', source, _U('started_to_rob') .. store.nameofstore .. _U('do_not_move'))
+			print('test 14')
 			TriggerClientEvent('esx:showNotification', source, _U('alarm_triggered'))
+			print('test 15')
 			TriggerClientEvent('esx:showNotification', source, _U('hold_pos'))
+			print('test 16')
 			TriggerClientEvent('crp_vangelicoheist:currentlyrobbing', source, robb)
             CancelEvent()
 			Stores[robb].lastrobbed = os.time()
 		else
+			print('test 17')
 			TriggerClientEvent('esx:showNotification', source, _U('robbery_already'))
 		end
 	end
