@@ -39,11 +39,7 @@ AddEventHandler('crp_vangelicoheist:toofar', function(robb)
 		TriggerClientEvent('crp_vangelicoheist:toofarlocal', source)
 		robbers[source] = nil
 		print('test 4')
-		TriggerClientEvent('ox_lib:notify', source,				
-			title = 'Vangelico Heist',
-			description = 'Robbery finished ' .. Stores[robb].nameofstore,
-			type = 'inform'
-		)
+		TriggerClientEvent('ox_lib:notify', source,	{title = 'Vangelico Heist', description = 'Robbery finished ' .. Stores[robb].nameofstore, type = 'inform'})
 	end
 end)
 
@@ -58,11 +54,7 @@ AddEventHandler('crp_vangelicoheist:endrob', function(robb)
 		TriggerClientEvent('crp_vangelicoheist:robberycomplete', source)
 		robbers[source] = nil
 		print('test 8')
-		TriggerClientEvent('ox_lib:notify', source,				
-			title = 'Vangelico Heist',
-			description = 'Robbery finished ' .. Stores[robb].nameofstore,
-			type = 'inform'
-		)
+		TriggerClientEvent('ox_lib:notify', source,	{title = 'Vangelico Heist', description = 'Robbery finished ' .. Stores[robb].nameofstore, type = 'inform'})
 	end
 end)
 
@@ -82,57 +74,27 @@ AddEventHandler('crp_vangelicoheist:rob', function(robb)
 			print('test 9')
             TriggerClientEvent('crp_vangelicoheist:togliblip', source)
 			print('test 10')
-			TriggerClientEvent('ox_lib:notify', source,				
-				title = 'Vangelico Heist',
-				description = 'Vangelico has already been robbed. You will need to wait ' .. (Config.SecBetwNextRob - (os.time() - store.lastrobbed)) .. ' seconds.',
-				type = 'inform'
-			)
+			TriggerClientEvent('ox_lib:notify', source,	{title = 'Vangelico Heist',	description = 'Vangelico has already been robbed. You will need to wait ' .. (Config.SecBetwNextRob - (os.time() - store.lastrobbed)) .. ' seconds.', type = 'inform'})
 			return
 		end
 
 		if rob == false then
 			rob = true
-			TriggerEvent(
-				"core_dispatch:addCall",
-				"10-71",
-				"Vangelico Robbery",
-				{{icon = "fa-venus-mars", info = "male"}},
-				{Stores["jewelry"].position.x, Stores["jewelry"].position.y, Stores["jewelry"].position.z},
-				"police",
-				5000,
-				156,
-				1
-			)
+			TriggerEvent("core_dispatch:addCall", "10-71", "Vangelico Robbery", {{icon = "fa-venus-mars", info = "male"}}, {Stores["jewelry"].position.x, Stores["jewelry"].position.y, Stores["jewelry"].position.z}, "police", 5000, 156, 1)
 
 			print('test 13')
-			TriggerClientEvent('ox_lib:notify', source,				
-				title = 'Vangelico Heist',
-				description = 'You started the robbery ' .. store.nameofstore .. ', take the diamonds from the windows!',
-				type = 'inform'
-			)
+			TriggerClientEvent('ox_lib:notify', source,	{title = 'Vangelico Heist', description = 'You started the robbery ' .. store.nameofstore .. ', take the diamonds from the windows!', type = 'inform'})
 			print('test 14')
-			TriggerClientEvent('ox_lib:notify', source,				
-				title = 'Vangelico Heist',
-				description = 'The alarm has been triggered!',
-				type = 'inform'
-			)
+			TriggerClientEvent('ox_lib:notify', source, {title = 'Vangelico Heist',	description = 'The alarm has been triggered!', type = 'inform'})
 			print('test 15')
-			TriggerClientEvent('ox_lib:notify', source,				
-				title = 'Vangelico Heist',
-				description = 'When you\'ve collected all the diamonds, run away!',
-				type = 'inform'
-			)
+			TriggerClientEvent('ox_lib:notify', source,	{title = 'Vangelico Heist', description = 'When you\'ve collected all the diamonds, run away!', type = 'inform'})
 			print('test 16')
 			TriggerClientEvent('crp_vangelicoheist:currentlyrobbing', source, robb)
             CancelEvent()
 			Stores[robb].lastrobbed = os.time()
 		else
 			print('test 17')
-			TriggerClientEvent('ox_lib:notify', source,				
-				title = 'Vangelico Heist',
-				description = 'A robbery is already in progress.',
-				type = 'inform'
-			)
+			TriggerClientEvent('ox_lib:notify', source,	{title = 'Vangelico Heist',	description = 'A robbery is already in progress.', type = 'inform'})
 		end
 	end
 end)
