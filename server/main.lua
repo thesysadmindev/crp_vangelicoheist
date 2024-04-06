@@ -25,14 +25,7 @@ RegisterServerEvent('crp_vangelicoheist:toofar')
 AddEventHandler('crp_vangelicoheist:toofar', function(robb)
 	local source = source
 	local xPlayer = ESX.GetPlayerFromId(source)
-	local xPlayers = ESX.GetExtendedPlayers()
 	rob = false
-	for _, xPlayer in pairs(xPlayers) do
-		print('test 1')
-		TriggerClientEvent('ox_lib:notify', source, {title = 'Vangelico Heist', description = 'Robbery has been cancelled at ' .. Stores[robb].nameofstore,	type = 'inform'})
-		print('test 2')
-		TriggerClientEvent('crp_vangelicoheist:killblip', xPlayers[i])
-	end
 
 	if(robbers[source])then
 		print('test 3')
