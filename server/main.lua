@@ -8,7 +8,8 @@ function get3DDistance(x1, y1, z1, x2, y2, z2)
 end
 
 function CountCops()
-	v
+	local xPlayer = ESX.GetPlayerFromId(source)
+	local xPlayers = ESX.GetExtendedPlayers()
 	CopsConnected = 0
 
 	for _, xPlayer in pairs(xPlayers) do
