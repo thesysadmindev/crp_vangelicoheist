@@ -29,7 +29,7 @@ AddEventHandler('crp_vangelicoheist:toofar', function(robb)
 	rob = false
 	for _, xPlayer in pairs(xPlayers) do
 		print('test 1')
-		TriggerClientEvent('ox_lib:notify', source,				
+		TriggerClientEvent('ox_lib:notify', source,
 			title = 'Vangelico Heist',
 			description = 'Robbery has been cancelled at ' .. Stores[robb].nameofstore,
 			type = 'inform'
