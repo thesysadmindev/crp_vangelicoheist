@@ -323,7 +323,7 @@ Citizen.CreateThread(function()
 								blip = false
 								TriggerEvent('esx:showNotification', _U('notenoughgold'))
 							end
-						end, 'jewels')
+						end, 'diamond')
 					end
 				end
 			end
