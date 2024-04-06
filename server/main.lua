@@ -29,7 +29,11 @@ AddEventHandler('crp_vangelicoheist:toofar', function(robb)
 	rob = false
 	for _, xPlayer in pairs(xPlayers) do
 		print('test 1')
-		TriggerClientEvent('esx:showNotification', xPlayers[i], _U('robbery_cancelled_at') .. Stores[robb].nameofstore)
+		TriggerClientEvent('ox_lib:notify', source,				
+			title = 'Vangelico Heist',
+			description = 'Robbery has been cancelled at ' .. Stores[robb].nameofstore,
+			type = 'inform'
+		)
 		print('test 2')
 		TriggerClientEvent('crp_vangelicoheist:killblip', xPlayers[i])
 	end
@@ -39,7 +43,11 @@ AddEventHandler('crp_vangelicoheist:toofar', function(robb)
 		TriggerClientEvent('crp_vangelicoheist:toofarlocal', source)
 		robbers[source] = nil
 		print('test 4')
-		TriggerClientEvent('esx:showNotification', source, _U('robbery_has_cancelled') .. Stores[robb].nameofstore)
+		TriggerClientEvent('ox_lib:notify', source,				
+			title = 'Vangelico Heist',
+			description = 'Robbery finished ' .. Stores[robb].nameofstore,
+			type = 'inform'
+		)
 	end
 end)
 
@@ -47,21 +55,18 @@ RegisterServerEvent('crp_vangelicoheist:endrob')
 AddEventHandler('crp_vangelicoheist:endrob', function(robb)
 	local source = source
 	local xPlayer = ESX.GetPlayerFromId(source)
-	local xPlayers = ESX.GetExtendedPlayers()
 	rob = false
-	for _, xPlayer in pairs(xPlayers) do
-		print('test 5')
-		TriggerClientEvent('esx:showNotification', xPlayers[i], _U('end'))
-		print('test 6')
-		TriggerClientEvent('crp_vangelicoheist:killblip', xPlayers[i])
-	end
-
+	
 	if(robbers[source])then
 		print('test 7')
 		TriggerClientEvent('crp_vangelicoheist:robberycomplete', source)
 		robbers[source] = nil
 		print('test 8')
-		TriggerClientEvent('esx:showNotification', source, _U('robbery_has_ended') .. Stores[robb].nameofstore)
+		TriggerClientEvent('ox_lib:notify', source,				
+			title = 'Vangelico Heist',
+			description = 'Robbery finished ' .. Stores[robb].nameofstore,
+			type = 'inform'
+		)
 	end
 end)
 
@@ -71,7 +76,6 @@ AddEventHandler('crp_vangelicoheist:rob', function(robb)
 
 	local source = source
 	local xPlayer = ESX.GetPlayerFromId(source)
-	local xPlayers = ESX.GetExtendedPlayers()
 	
 	if Stores[robb] then
 
@@ -82,7 +86,11 @@ AddEventHandler('crp_vangelicoheist:rob', function(robb)
 			print('test 9')
             TriggerClientEvent('crp_vangelicoheist:togliblip', source)
 			print('test 10')
-			TriggerClientEvent('esx:showNotification', source, _U('already_robbed') .. (Config.SecBetwNextRob - (os.time() - store.lastrobbed)) .. _U('seconds'))
+			TriggerClientEvent('ox_lib:notify', source,				
+				title = 'Vangelico Heist',
+				description = 'Vangelico has already been robbed. You will need to wait ' .. (Config.SecBetwNextRob - (os.time() - store.lastrobbed)) .. ' seconds.',
+				type = 'inform'
+			)
 			return
 		end
 
@@ -101,18 +109,34 @@ AddEventHandler('crp_vangelicoheist:rob', function(robb)
 			)
 
 			print('test 13')
-			TriggerClientEvent('esx:showNotification', source, _U('started_to_rob') .. store.nameofstore .. _U('do_not_move'))
+			TriggerClientEvent('ox_lib:notify', source,				
+				title = 'Vangelico Heist',
+				description = 'You started the robbery ' .. store.nameofstore .. ', take the diamonds from the windows!',
+				type = 'inform'
+			)
 			print('test 14')
-			TriggerClientEvent('esx:showNotification', source, _U('alarm_triggered'))
+			TriggerClientEvent('ox_lib:notify', source,				
+				title = 'Vangelico Heist',
+				description = 'The alarm has been triggered!',
+				type = 'inform'
+			)
 			print('test 15')
-			TriggerClientEvent('esx:showNotification', source, _U('hold_pos'))
+			TriggerClientEvent('ox_lib:notify', source,				
+				title = 'Vangelico Heist',
+				description = 'When you\'ve collected all the diamonds, run away!',
+				type = 'inform'
+			)
 			print('test 16')
 			TriggerClientEvent('crp_vangelicoheist:currentlyrobbing', source, robb)
             CancelEvent()
 			Stores[robb].lastrobbed = os.time()
 		else
 			print('test 17')
-			TriggerClientEvent('esx:showNotification', source, _U('robbery_already'))
+			TriggerClientEvent('ox_lib:notify', source,				
+				title = 'Vangelico Heist',
+				description = 'A robbery is already in progress.',
+				type = 'inform'
+			)
 		end
 	end
 end)

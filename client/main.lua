@@ -49,14 +49,6 @@ function DisplayHelpText(str)
 	DisplayHelpTextFromStringLabel(0, 0, 1, -1)
 end
 
-RegisterNetEvent("mt:missiontext")
-AddEventHandler("mt:missiontext", function(text, time)
-    ClearPrints()
-    SetTextEntry_2("STRING")
-    AddTextComponentString(text)
-    DrawSubtitleTimed(time, 1)
-end)
-
 function loadAnimDict( dict )  
     while ( not HasAnimDictLoaded( dict ) ) do
         RequestAnimDict( dict )
@@ -87,7 +79,11 @@ end)
 RegisterNetEvent('crp_vangelicoheist:toofarlocal')
 AddEventHandler('crp_vangelicoheist:toofarlocal', function(robb)
 	holdingup = false
-	ESX.ShowNotification(_U('robbery_cancelled'))
+	lib.notify({
+		title = 'Vangelico Heist',
+		description = 'The heist has been cancelled.',
+		type = 'inform'
+	})
 	robbingName = ""
 	incircle = false
 end)
@@ -96,7 +92,11 @@ end)
 RegisterNetEvent('crp_vangelicoheist:robberycomplete')
 AddEventHandler('crp_vangelicoheist:robberycomplete', function(robb)
 	holdingup = false
-	ESX.ShowNotification(_U('robbery_complete'))
+	lib.notify({
+		title = 'Vangelico Heist',
+		description = 'You have successfully completed the heist! Time to get away...',
+		type = 'success'
+	})
 	store = ""
 	incircle = false
 end)
@@ -170,7 +170,11 @@ Citizen.CreateThread(function()
 							                TriggerServerEvent('crp_vangelicoheist:rob', k)
 									        PlaySoundFromCoord(soundid, "VEHICLES_HORNS_AMBULANCE_WARNING", pos2.x, pos2.y, pos2.z)
 								        else
-									        TriggerEvent('esx:showNotification', _U('min_two_police') .. Config.RequiredCopsRob .. _U('min_two_police2'))
+											lib.notify({
+												title = 'Vangelico Heist',
+												description = 'There must be at least ' .. Config.RequiredCopsRob .. ' police online to complete the heist!',
+												type = 'error'
+											})
 								        end
 							        end)		
 						        else
@@ -182,7 +186,11 @@ Citizen.CreateThread(function()
 										TriggerServerEvent('crp_vangelicoheist:rob', k)
 										PlaySoundFromCoord(soundid, "VEHICLES_HORNS_AMBULANCE_WARNING", pos2.x, pos2.y, pos2.z)
 									else
-										TriggerEvent('esx:showNotification', _U('min_two_police') .. Config.RequiredCopsRob .. _U('min_two_police2'))
+										lib.notify({
+											title = 'Vangelico Heist',
+											description = 'There must be at least ' .. Config.RequiredCopsRob .. ' police online to complete the heist!',
+											type = 'error'
+										})
 									end
 								end)	
 							end	
@@ -219,7 +227,11 @@ Citizen.CreateThread(function()
 					    StartParticleFxLoopedAtCoord("scr_jewel_cab_smash", v.x, v.y, v.z, 0.0, 0.0, 0.0, 1.0, false, false, false, false)
 					    loadAnimDict( "missheist_jewel" ) 
 						TaskPlayAnim(GetPlayerPed(-1), "missheist_jewel", "smash_case", 8.0, 1.0, -1, 2, 0, 0, 0, 0 ) 
-						TriggerEvent("mt:missiontext", _U('collectinprogress'), 3000)
+						lib.notify({
+							title = 'Vangelico Heist',
+							description = 'Diamond collection in progress...',
+							type = 'inform'
+						})
 					    --DisplayHelpText(_U('collectinprogress'))
 					    DrawSubtitleTimed(5000, 1)
 					    Citizen.Wait(5000)
@@ -309,7 +321,11 @@ Citizen.CreateThread(function()
 								ESX.TriggerServerCallback('crp_vangelicoheist:conteggio', function(CopsConnected)
 									if CopsConnected >= Config.RequiredCopsSell then
 										FreezeEntityPosition(playerPed, true)
-										TriggerEvent('mt:missiontext', _U('goldsell'), 10000)
+										lib.notify({
+											title = 'Vangelico Heist',
+											description = 'Jewels sale in progress...',
+											type = 'inform'
+										})
 										Wait(10000)
 										FreezeEntityPosition(playerPed, false)
 										TriggerServerEvent('lester:vendita')
