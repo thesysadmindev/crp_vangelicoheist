@@ -88,15 +88,22 @@ AddEventHandler('crp_vangelicoheist:rob', function(robb)
 
 		if rob == false then
 
+			print(Stores["jewelry"].position.x, Stores["jewelry"].position.y, Stores["jewelry"].position.z)
+
 			local xPlayer = ESX.GetPlayerFromId(source)
 			local xPlayers = ESX.GetExtendedPlayers()
 			rob = true
-			for _, xPlayer in pairs(xPlayers) do
-				print('test 11')
-				TriggerClientEvent('esx:showNotification', xPlayers[i], _U('rob_in_prog') .. store.nameofstore)
-				print('test 12')
-				TriggerClientEvent('crp_vangelicoheist:setblip', xPlayers[i], Stores[robb].position)
-			end
+			TriggerEvent(
+				"core_dispatch:addCall",
+				"10-71",
+				"Vangelico Robbery",
+				{{icon = "fa-venus-mars", info = "male"}},
+				{coords[1], coords[2], coords[3]},
+				"police",
+				5000,
+				156,
+				1
+			)
 
 			print('test 13')
 			TriggerClientEvent('esx:showNotification', source, _U('started_to_rob') .. store.nameofstore .. _U('do_not_move'))
