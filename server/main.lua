@@ -88,7 +88,7 @@ AddEventHandler('crp_vangelicoheist:rob', function(robb)
 
 		if rob == false then
 
-			print(Stores["jewelry"].position.x, Stores["jewelry"].position.y, Stores["jewelry"].position.z)
+			print(, , )
 
 			local xPlayer = ESX.GetPlayerFromId(source)
 			local xPlayers = ESX.GetExtendedPlayers()
@@ -98,7 +98,7 @@ AddEventHandler('crp_vangelicoheist:rob', function(robb)
 				"10-71",
 				"Vangelico Robbery",
 				{{icon = "fa-venus-mars", info = "male"}},
-				{coords[1], coords[2], coords[3]},
+				{Stores["jewelry"].position.x, Stores["jewelry"].position.y, Stores["jewelry"].position.z},
 				"police",
 				5000,
 				156,
